@@ -23,7 +23,7 @@ jobs:
       run: |
         python -c "import platform;print('platform: ' + platform.platform());"
         python -c "import platform;print('system: ' + platform.system());"
-        python -c "import platform;print('architecture: ' + platform.architecture());"
+        python -c "import platform;print('architecture: ' + str(platform.architecture()));"
     - name: Python bit
       run: python -c "import sys;print(f'Is 64 bit if one - {sys.maxsize/2**63:f}')"
 
