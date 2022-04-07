@@ -10,13 +10,14 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    # - uses: actions/checkout@v3
     # Setup python
     - name: Setup python
       uses: actions/setup-python@v3
       with:
         python-version: 'pypy-3.9'
         architecture: x64
+    # Check python and windows architecture
     - name: Python
       run: python --version
     - name: Platform
@@ -25,11 +26,13 @@ jobs:
         python -c "import platform;print('system: ' + platform.system());"
         python -c "import platform;print('architecture: ' + str(platform.architecture()));"
     - name: Python bit
-      run: python -c "import sys;print(f'Is 64 bit if one - {sys.maxsize/2**63:f}')"
+      run: python -c "import sys;print(f'Return 0.0 for 32 bit and 1.0 for 64 bit python --> {sys.maxsize / 2**63:f}')"
 
     - name: Update pip
       run: python -m pip install --upgrade pip
     - name: Print package list
       run: pip list
+    
+    # Try to install pywin32
     - name: pywin32
       run: pip install pywin32
